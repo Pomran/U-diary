@@ -22,7 +22,7 @@ ACCOUNT_ID = "你的 Account ID"      # 在 R2 页面右上角找到
 ACCESS_KEY = "你的 Access Key ID"   # 在 R2 → 管理令牌 创建
 SECRET_KEY = "你的 Secret Access Key"
 BUCKET_NAME = "u-diary"
-PUBLIC_URL = "https://pub-你的桶ID.r2.dev"  # 桶的公开访问域名
+PUBLIC_URL = "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev"  # 桶的公开访问域名
 # ═══════════════════════════════════
 
 PHOTOS_DIR = "photos"
