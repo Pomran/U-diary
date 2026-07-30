@@ -1,0 +1,16 @@
+# 本地照片（不上传仓库，直接上传 R2）
+/photos/
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统
+.DS_Store
+Thumbs.db
