@@ -1,566 +1,530 @@
 [
   {
+    "id": 1,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/c83fe347d870cd485b85692cf953233c.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 2,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/15bc54074dbd11763f74788584973cca.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 3,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/5a48ab741f83271cb6d2d49aa2ca8ea3.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 4,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/9df46cb77c00c6f95d3d96a93801e48f.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 5,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/4e85fa85dc2011374da2e12bfc46aed5.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 6,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/a4de61dbb2ecd933541383e7dc4e2ba9.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 7,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/9589b064e7c60f0b138bbc763bea0037.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 8,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/8f929518ecc4b8fc60831ffd5a1a5bb9.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 9,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/ebda4dc4e9817607dd1de37231c2cfa1.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 10,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/b16e8f406ffcb8f8c2da2ef0a7258ab3.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 11,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/bce5c5fd5ee6a953911c82292d46720a.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 12,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/0a16fcc8bb714f8318d87384ea5bb46e.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 13,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/29ab97dd1989d3412344030211012f26.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 14,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/f13c4df1ebd43ad81b5cef03c0446f5a.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
     "id": 15,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/3af4ad95d8223ba2978f750269d2d010.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/ee92227bc82c2cf2de9bfb5ef5cf1909.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 16,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/609475ac087489c75d982e14bffa533f.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/2cdc8a60a45e2869ed98416745cb77c9.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
   },
   {
     "id": 17,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/e0b6fd9f1ce8b50f670e100d894285e3.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/4f4d4b730930b3d81a6b1081c691cb2e.jpg",
     "date": "20XX.XX.XX",
-    "cat": "travel"
+    "cat": "campus"
   },
   {
     "id": 18,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1658546899290.jpg",
-    "date": "2022.07.23",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/83a9431785a869f656549532624a1db1.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 19,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220402_172553.jpg",
-    "date": "2022.04.02",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1eeee2907fd1a8d16edf932b70f7d25d.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 20,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220404_121353.jpg",
-    "date": "2022.04.04",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/af4d0e7a42a06f5c48fa53d8f91d62fe.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 21,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220404_180849.jpg",
-    "date": "2022.04.04",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/370222d34ddc42fe6797708f0a47f028.jpg",
+    "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 22,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220407_101011.jpg",
-    "date": "2022.04.07",
-    "cat": "night"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/6ebbf26bca9a06179881a0c9dc2e604e.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 23,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220413_121244.jpg",
-    "date": "2022.04.13",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/f2090590064ffdb39ab05a21f2dfcca0.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 24,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220413_121318.jpg",
-    "date": "2022.04.13",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/a6e9d782f8c59e312cd63d49fd77c275.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 25,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220413_181040.jpg",
-    "date": "2022.04.13",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/d7dcb6ebbe41cc9b1b80790bdfd79065.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 26,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220414_111412.jpg",
-    "date": "2022.04.14",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/ee846cbd602bdd08bfaedd44325f650e.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 27,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220529_172939.jpg",
-    "date": "2022.05.29",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/c727be488cdd81388b7927c785dadff2.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 28,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220529_172947.jpg",
-    "date": "2022.05.29",
-    "cat": "night"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/2334d6145a5c9acb71212568478fcaf5.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 29,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220529_205317.jpg",
-    "date": "2022.05.29",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/cc8624b8b080af31ab2fa227ec778278.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 30,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220601_172257.jpg",
-    "date": "2022.06.01",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/ad8693f7ad09e8ec724cd7933dd37fb6.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 31,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220601_194534.jpg",
-    "date": "2022.06.01",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/116f6769cf5f497d0e5309f187ac8ed8.jpg",
+    "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 32,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220603_192925.jpg",
-    "date": "2022.06.03",
-    "cat": "night"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1987fb9e7d6651410f3d53c6cd609837.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 33,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220709_175943.jpg",
-    "date": "2022.07.09",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/e37e92b778a4f87604384587738e2555.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 34,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220709_175949.jpg",
-    "date": "2022.07.09",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/40f2048353380ffe365ce68b16d51658.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 35,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220709_180207.jpg",
-    "date": "2022.07.09",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/3aa78bb416d63e20ea9196d0efaa528c.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 36,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220908_201818.jpg",
-    "date": "2022.09.08",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/6b977cc11474341d4b14f825a38e4730.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 37,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220910_212346.jpg",
-    "date": "2022.09.10",
-    "cat": "travel"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/b3566f4f80e8fb4f240008b65317b340.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 38,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220910_212901.jpg",
-    "date": "2022.09.10",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/82598f118135c499ae4fcbea8d3bc934.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 39,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220910_212931.jpg",
-    "date": "2022.09.10",
-    "cat": "night"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/ec7b6770c04a7eeed2aab5e7346c3fb0.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 40,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220910_213846.jpg",
-    "date": "2022.09.10",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/6f27254faf4102c82cf08d4a897ebcb0.jpg",
+    "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 41,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220910_215206.jpg",
-    "date": "2022.09.10",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/07eb6923cfd07f3455074409e039a37d.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 42,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220911_174757.jpg",
-    "date": "2022.09.11",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/48fe6ad869acd34b6cc2c12c8d2c2d61.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 43,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/PSX_20220409_082829.jpg",
-    "date": "2022.04.09",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/b8451a49257f4212fd38ae0651d5f014.jpg",
+    "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 44,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/qxlarge-dsc-156C2689D7DCD5C626A8226AFD6FD369.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/aeede101f1da3cddd5431c9d7231a7c8.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 45,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/qxlarge-dsc-39152608365CE796B22AFA88BCEB88DD.jpg",
-    "date": "2094.01.25",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/06c527429dbedf33eed8a98e1f07228e.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 46,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/qxlarge-dsc-B8EBF0864BD590A769261C05AB1EF05C.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/375a0660fe8117c6255173e324f936e4.jpg",
     "date": "20XX.XX.XX",
-    "cat": "travel"
+    "cat": "campus"
   },
   {
     "id": 47,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/retouch_2022040911122919.jpg",
-    "date": "2022.04.09",
-    "cat": "people"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/0476615a572d3496db29e89043667c00.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 48,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1664768183490.jpg",
-    "date": "1664768183",
-    "cat": "night"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/5f80c71666aed082dd2bcc10f1421c5c.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 49,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1708473193.jpg",
-    "date": "1708473193",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/6b25d11bc6283aeea50e4cd473a1dd39.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 50,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20221003_175811.jpg",
-    "date": "20221003.1",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1fdd6a65eb244c4735b7c007198375c3.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 51,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20221010_181933.jpg",
-    "date": "20221010.1",
-    "cat": "daily"
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/58533f10367050d537d1f2e50b4baaa8.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 52,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/AGC_20230412_124807315(1).jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/84386f556678f40777354d846e13c324.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
   },
   {
     "id": 53,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/AGC_20230607_090043352.PANO.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/692f002660bcf97473ddc40f05772340.jpg",
     "date": "20XX.XX.XX",
-    "cat": "people"
+    "cat": "campus"
   },
   {
     "id": 54,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/CRnall_20231206_175721361.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/e5f163c0d42fb4715a53422764f5884d.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 55,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20230607_165306_lmc_8.4.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/09f0cb202cc5c4d075ad2e6b004efab4.jpg",
     "date": "20XX.XX.XX",
-    "cat": "travel"
+    "cat": "campus"
   },
   {
     "id": 56,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20231224_165128005_HDR.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/a42f3b7182cda3ff9e256a2f801c4975.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 57,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20231224_170638485_HDR.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/14fe4635c69266638cc5c8644b2bd844.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 58,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240312_175319829.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/dd2e3ac97d0bd7b87bb23f93865225d3.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 59,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240323_103216925.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/70b7ea63e1fdf37662e252ea34b1d08f.jpg",
     "date": "20XX.XX.XX",
-    "cat": "people"
+    "cat": "campus"
   },
   {
     "id": 60,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240323_103235069(1).jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/4254a4bd65cd2e4dc89f465a5ddca47e.jpg",
     "date": "20XX.XX.XX",
-    "cat": "travel"
+    "cat": "campus"
   },
   {
     "id": 61,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240416_183633741.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/dbbf5b4ebbdc3b8ea4997103dbc1942b.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 62,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240624_184247823_HDR.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/8f3e81529b1583b19ec2ef4112fefbac.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
+  },
+  {
+    "id": 63,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/bd1b0b6b556d69f78c4fbc0ea32d8dd5.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 64,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240926_101813188.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/488a64efc65cbc0f5da50ff1c05113e3.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 65,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20241023_170555253_MF_PORTRAIT.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/b5ad0360c8582ad1e4320604aa888406.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 66,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20241111_170102382.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/d578232883ba19b08c5e68bb8ac89bc4.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 67,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20241129_102701462_MF_PORTRAIT.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/8da3972e83bd617319305b0848ebd7fb.jpg",
     "date": "20XX.XX.XX",
-    "cat": "travel"
+    "cat": "campus"
   },
   {
     "id": 68,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20250102_170543737.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/8dbfd59b8ba6d42e142bfcb618c79f27.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 69,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221029_161454666.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/d0aa61fe4772a423d6cd52e8a7d3f656.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 70,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221030_080137978.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/77bbe8e9b032fe9886df82adeda59f60.jpg",
     "date": "20XX.XX.XX",
-    "cat": "people"
+    "cat": "campus"
+  },
+  {
+    "id": 71,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/a95766930c3a8b945ad1e4a260d63840.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 72,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/feab71ba656c427e3e34552655276b7b.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 73,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221109_121410934.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/9a0ce54c834b9f343759a0f9a8ea4ce5.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
   },
   {
     "id": 74,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_160642489.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/f705998a2470ec1b31b678e27ab03f84.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
   },
   {
     "id": 75,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_180755375.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1ddf387e54ce90916a83921153517c38.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
   },
   {
     "id": 76,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_180812874.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1c9e240d9eac6a406d6cec9e0026d399.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 77,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_181456367.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/8a060daa628ca18c2d027ec7df4a1ff8.jpg",
     "date": "20XX.XX.XX",
-    "cat": "daily"
+    "cat": "campus"
   },
   {
     "id": 78,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_181521850(1).jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/940534e9d52567a0102dc0d149a063a5.jpg",
     "date": "20XX.XX.XX",
-    "cat": "night"
+    "cat": "campus"
   },
   {
     "id": 79,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_181521850.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/d04fa8722e6f93bb18b61107fe761c86.jpg",
     "date": "20XX.XX.XX",
-    "cat": "travel"
+    "cat": "campus"
   },
   {
     "id": 80,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_181543449.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/a1137cd86306034691a3c192c63f6a4d.jpg",
     "date": "20XX.XX.XX",
-    "cat": "people"
+    "cat": "campus"
   },
   {
     "id": 81,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221110_181654020.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/73b1a388c39ce373d5bc16b6b09d6620.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
+  },
+  {
+    "id": 82,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/bc1f11d38df89d6ea159bd55e55c689d.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 83,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/Lieall_20230308_071401724.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/52d7a631aa097aea9bbdb7a8461e7cf2.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 84,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/Lieall_20240524_104258221.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/2e705f281ff39238574bf2e70bc95ae4.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 85,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/Lieall_20240524_104321672.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/14ddbfd145932db164caf78d6412e15a.jpg",
     "date": "20XX.XX.XX",
-    "cat": "people"
+    "cat": "campus"
+  },
+  {
+    "id": 86,
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/4632ec4926ceb8ba29bf81f47eaa00bd.jpg",
+    "date": "20XX.XX.XX",
+    "cat": "campus"
   },
   {
     "id": 87,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/Lieall_20240705_180923986.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/9d242369e021947e89dc4e1904649831.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
   },
   {
     "id": 88,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/Lieall_20250102_170324945.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "people"
-  },
-  {
-    "id": 89,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1636254880930.jpg",
-    "date": "1636254880",
-    "cat": "night"
-  },
-  {
-    "id": 90,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/1636254900674.jpg",
-    "date": "1636254900",
-    "cat": "travel"
-  },
-  {
-    "id": 91,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20210426_203738.jpg",
-    "date": "20210426.2",
-    "cat": "travel"
-  },
-  {
-    "id": 92,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20210429_190011.jpg",
-    "date": "20210429.1",
-    "cat": "night"
-  },
-  {
-    "id": 93,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20210528_180058.jpg",
-    "date": "20210528.1",
-    "cat": "campus"
-  },
-  {
-    "id": 94,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20210927_185920.jpg",
-    "date": "20210927.1",
-    "cat": "night"
-  },
-  {
-    "id": 95,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20211025_080454.jpg",
-    "date": "20211025.0",
-    "cat": "campus"
-  },
-  {
-    "id": 96,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20211110_173949.jpg",
-    "date": "20211110.1",
-    "cat": "night"
-  },
-  {
-    "id": 97,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220404_180849(1).jpg",
-    "date": "20220404.1",
-    "cat": "people"
-  },
-  {
-    "id": 98,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220425_180938.jpg",
-    "date": "20220425.1",
-    "cat": "travel"
-  },
-  {
-    "id": 99,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220529_172939(1).jpg",
-    "date": "20220529.1",
-    "cat": "daily"
-  },
-  {
-    "id": 100,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220529_172947(1).jpg",
-    "date": "20220529.1",
-    "cat": "daily"
-  },
-  {
-    "id": 101,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220529_205317(1).jpg",
-    "date": "20220529.2",
-    "cat": "campus"
-  },
-  {
-    "id": 102,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20220601_172257(1).jpg",
-    "date": "20220601.1",
-    "cat": "people"
-  },
-  {
-    "id": 103,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20230928123502265.jpg",
-    "date": "2023092812",
-    "cat": "people"
-  },
-  {
-    "id": 104,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/20230928123528508.jpg",
-    "date": "2023092812",
-    "cat": "travel"
-  },
-  {
-    "id": 105,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/464e494df70bf43c.jpg",
-    "date": "464e494df7",
-    "cat": "people"
-  },
-  {
-    "id": 106,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/retouch_20210430143435.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "people"
-  },
-  {
-    "id": 107,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20230423_114033_lmc_8.4.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "travel"
-  },
-  {
-    "id": 108,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20230706_191354_lmc_8.4.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "travel"
-  },
-  {
-    "id": 109,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240323_164930802.jpg",
+    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/ec77d446125d195ae739e930e49e2d6c.jpg",
     "date": "20XX.XX.XX",
     "cat": "campus"
-  },
-  {
-    "id": 110,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20240917_185111264.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "people"
-  },
-  {
-    "id": 111,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/IMG_20260731_135818.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "people"
-  },
-  {
-    "id": 112,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20221111_210013917.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "campus"
-  },
-  {
-    "id": 113,
-    "src": "https://pub-af6cc2aa40a64382b17825de8e4a74e0.r2.dev/LieAll_20230217_185849633.jpg",
-    "date": "20XX.XX.XX",
-    "cat": "travel"
   }
 ]
