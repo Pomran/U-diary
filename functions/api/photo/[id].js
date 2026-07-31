@@ -58,7 +58,7 @@ export async function onRequestPost({ request, params, env }) {
     const key = `comments:${id}`;
     const raw = await env.DIARY_KV.get(key);
     const comments = raw ? JSON.parse(raw) : [];
-    const next = comments.filter(c => c.id && c.id === body.commentId);
+    const next = comments.filter(c => !c.id || c.id !== body.commentId);
     if (next.length === comments.length) {
       return json({ ok: false, error: '评论不存在' }, 404);
     }
