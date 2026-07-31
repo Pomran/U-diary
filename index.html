@@ -205,8 +205,78 @@ nav {
 }
 
 /* ─── 评价弹层 ─── */
+/* ─── 全屏灯箱 ─── */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(18,18,18,0.94);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lb-stage {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 4.5rem 5.5rem 5rem;
+}
+.lb-stage img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; border-radius: 4px;
+  opacity: 0; transform: scale(0.98);
+  transition: opacity 0.4s ease, transform 0.4s var(--ease-out-cubic);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.lb-stage img.loaded { opacity: 1; transform: scale(1); }
+.lb-top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+  display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem;
+}
+.lb-counter { color: rgba(255,255,255,0.6); font-family: 'Caveat', cursive; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.lb-close {
+  background: rgba(255,255,255,0.12); color: #fff; border: none; cursor: pointer;
+  width: 40px; height: 40px; border-radius: 50%; font-size: 1.3rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s var(--ease-spring);
+}
+.lb-close:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg) scale(1.05); }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+  width: 48px; height: 48px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255,255,255,0.1); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: all 0.25s ease;
+}
+.lb-nav svg { width: 24px; height: 24px; }
+.lightbox:hover .lb-nav { opacity: 1; }
+.lb-nav:hover { background: rgba(255,255,255,0.25); transform: translateY(-50%) scale(1.08); }
+.lb-prev { left: 1rem; }
+.lb-next { right: 1rem; }
+@media (hover: none) { .lb-nav { opacity: 1; } }
+.lb-info {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.2rem 1.5rem 1.1rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.55));
+}
+.lb-meta { display: flex; gap: 0.7rem; align-items: baseline; }
+.lb-cat {
+  font-family: 'Noto Serif SC', serif; background: rgba(91,138,122,0.75); color: #fff;
+  padding: 0.15rem 0.7rem; border-radius: 12px; font-size: 0.78rem; white-space: nowrap;
+}
+.lb-date { font-size: 0.85rem; color: rgba(255,255,255,0.72); white-space: nowrap; }
+.lb-actions { display: flex; gap: 0.5rem; }
+.lb-action { background: rgba(255,255,255,0.92); }
+.lb-action.liked { color: var(--secondary); background: rgba(255,250,250,0.95); }
+.lb-action.liked svg { fill: var(--secondary); stroke: var(--secondary); }
+
+@media (max-width: 640px) {
+  .lb-stage { padding: 4rem 0.5rem 4.5rem; }
+  .lb-nav { width: 40px; height: 40px; }
+  .lb-prev { left: 0.4rem; }
+  .lb-next { right: 0.4rem; }
+}
+
 .modal-backdrop {
-  position: fixed; inset: 0; z-index: 1000;
+  position: fixed; inset: 0; z-index: 3000;
   background: rgba(45,45,45,0.45); backdrop-filter: blur(6px);
   display: flex; align-items: center; justify-content: center; padding: 1rem;
   opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
@@ -315,6 +385,38 @@ footer:hover span { transform: rotate(12deg) scale(1.2); }
   <p style="margin-top:0.3rem;font-size:0.78rem;">每一帧都是青春的切片</p>
 </footer>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lb-top">
+    <span class="lb-counter" id="lbCounter"></span>
+    <button class="lb-close" id="lbClose" title="关闭">×</button>
+  </div>
+  <button class="lb-nav lb-prev" id="lbPrev" title="上一张">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <div class="lb-stage" id="lbStage">
+    <img id="lbImage" src="" alt="photo">
+  </div>
+  <button class="lb-nav lb-next" id="lbNext" title="下一张">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="lb-info">
+    <div class="lb-meta">
+      <span class="lb-cat" id="lbCat"></span>
+      <span class="lb-date" id="lbDate"></span>
+    </div>
+    <div class="lb-actions">
+      <button class="act lb-action act-like" id="lbLike" data-id="" title="喜爱">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="act-count" data-kind="likes">0</span>
+      </button>
+      <button class="act lb-action act-comment" id="lbComment" data-id="" title="评价">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="act-count" data-kind="comments">0</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="commentModal">
   <div class="modal">
     <div class="modal-photo"><img id="modalPhoto" src="" alt=""></div>
@@ -332,6 +434,7 @@ footer:hover span { transform: rotate(12deg) scale(1.2); }
 
 <script>
 const PAGE_SIZE = 12;
+const CAT_NAMES = { campus: '校园', travel: '旅行', daily: '日常', people: '人像', night: '夜色' };
 let allPhotos = [];
 let heatMap = null;
 let currentSort = 'time';
@@ -340,10 +443,21 @@ let loading = false;
 let loaded = false;
 let modalId = null;
 let modalComments = [];
+let lbIndex = -1;
+let lbList = [];
+let lbTouchX = 0;
 
 const gallery = document.getElementById('gallery');
 const loader = document.getElementById('loader');
 const stats = document.getElementById('stats');
+const lightbox = document.getElementById('lightbox');
+const lbImage = document.getElementById('lbImage');
+const lbStage = document.getElementById('lbStage');
+const lbCat = document.getElementById('lbCat');
+const lbDate = document.getElementById('lbDate');
+const lbCounter = document.getElementById('lbCounter');
+const lbLike = document.getElementById('lbLike');
+const lbComment = document.getElementById('lbComment');
 const modal = document.getElementById('commentModal');
 const modalPhoto = document.getElementById('modalPhoto');
 const commentList = document.getElementById('commentList');
@@ -372,6 +486,7 @@ async function loadPhotos() {
     }
   }
   onSort('time');
+  handleHash();
 }
 
 /* ─── 排序 ─── */
@@ -431,7 +546,7 @@ function createCardHTML(p) {
   const comments = c?.comments || 0;
   const liked = !!localStorage.getItem('liked:' + p.id);
   return `
-    <div class="photo-img-wrap">
+    <div class="photo-img-wrap" data-id="${p.id}">
       <img src="${p.src}" alt="photo" loading="lazy" decoding="async" onload="this.classList.add('loaded')" />
       <div class="photo-actions">
         <button class="act act-like${liked ? ' liked' : ''}" data-id="${p.id}" title="喜爱">
@@ -513,9 +628,21 @@ observer.observe(loader);
 
 /* ─── 喜爱 ─── */
 function setCount(btn, kind, value) {
-  const card = btn.closest('.photo-card');
-  const el = card?.querySelector(`.act-count[data-kind="${kind}"]`);
+  const scope = btn.closest('.photo-card') || btn.closest('.lightbox');
+  const el = scope?.querySelector(`.act-count[data-kind="${kind}"]`);
   if (el) el.textContent = value;
+}
+
+function syncLikes(id, likes) {
+  document.querySelectorAll(`.act-like[data-id="${id}"]`).forEach(b => {
+    b.classList.add('liked');
+    const el = b.querySelector('.act-count');
+    if (el) el.textContent = likes;
+  });
+}
+
+function syncComments(id, count) {
+  document.querySelectorAll(`.act-comment[data-id="${id}"] .act-count`).forEach(el => el.textContent = count);
 }
 
 async function handleLike(btn) {
@@ -541,7 +668,7 @@ async function handleLike(btn) {
     const data = await res.json();
     if (data.ok) {
       if (heatMap) heatMap[id] = { likes: data.likes, comments: heatMap[id]?.comments || 0 };
-      setCount(btn, 'likes', data.likes);
+      syncLikes(id, data.likes);
     }
   } catch (e) { /* 静默失败，本地计数保留 */ }
 }
@@ -597,7 +724,111 @@ gallery.addEventListener('click', e => {
   const likeBtn = e.target.closest('.act-like');
   if (likeBtn) { handleLike(likeBtn); return; }
   const comBtn = e.target.closest('.act-comment');
-  if (comBtn) openModal(comBtn.dataset.id);
+  if (comBtn) openModal(comBtn.dataset.id); return;
+  const imgWrap = e.target.closest('.photo-img-wrap');
+  if (imgWrap && imgWrap.dataset.id) openLightbox(imgWrap.dataset.id);
+});
+
+/* ─── 全屏灯箱 ─── */
+function fmtDate(d) {
+  if (!d) return '';
+  const s = String(d).trim();
+  if (/^\d{10}$/.test(s)) {
+    const dt = new Date(parseInt(s, 10) * 1000);
+    if (!isNaN(dt.getTime())) {
+      return `${dt.getFullYear()}.${String(dt.getMonth() + 1).padStart(2, '0')}.${String(dt.getDate()).padStart(2, '0')}`;
+    }
+  }
+  const m = s.match(/^(\d{4})[.\-](\d{2})[.\-](\d{2})/);
+  if (m) return `${m[1]}.${m[2]}.${m[3]}`;
+  if (/^20XX/.test(s)) return '';
+  return s;
+}
+
+function renderLightbox() {
+  const p = lbList[lbIndex];
+  lbImage.classList.remove('loaded');
+  lbImage.src = p.src;
+  lbLike.dataset.id = p.id;
+  lbComment.dataset.id = p.id;
+
+  lbLike.classList.toggle('liked', !!localStorage.getItem('liked:' + p.id));
+  lbCat.textContent = CAT_NAMES[p.cat] || '';
+  lbDate.textContent = fmtDate(p.date);
+  lbCounter.textContent = `${lbIndex + 1} / ${lbList.length}`;
+
+  const c = heatMap ? heatMap[p.id] : null;
+  const likesEl = lbLike.querySelector('.act-count');
+  const comEl = lbComment.querySelector('.act-count');
+  if (likesEl) likesEl.textContent = c?.likes || 0;
+  if (comEl) comEl.textContent = c?.comments || 0;
+}
+
+function openLightbox(id) {
+  const list = buildDisplayList();
+  const idx = list.findIndex(p => String(p.id) === String(id));
+  if (idx < 0) return;
+  lbList = list;
+  lbIndex = idx;
+  renderLightbox();
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  history.replaceState(null, '', '#/photo/' + lbList[lbIndex].id);
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (/^#\/photo\//.test(location.hash)) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  lbIndex = -1;
+  lbList = [];
+}
+
+function goLightbox(step) {
+  if (lbIndex < 0 || lbList.length === 0) return;
+  lbIndex = (lbIndex + step + lbList.length) % lbList.length;
+  renderLightbox();
+  history.replaceState(null, '', '#/photo/' + lbList[lbIndex].id);
+}
+
+lightbox.addEventListener('click', e => {
+  const likeBtn = e.target.closest('.act-like');
+  if (likeBtn) { handleLike(likeBtn); return; }
+  const comBtn = e.target.closest('.act-comment');
+  if (comBtn) { openModal(comBtn.dataset.id); return; }
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => goLightbox(-1));
+document.getElementById('lbNext').addEventListener('click', () => goLightbox(1));
+
+lbStage.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+lbStage.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if (Math.abs(dx) > 48) goLightbox(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') goLightbox(-1);
+  else if (e.key === 'ArrowRight') goLightbox(1);
+  else if (e.key === 'Escape') closeLightbox();
+});
+
+function handleHash() {
+  const m = location.hash.match(/^#\/photo\/(.+)$/);
+  if (m && allPhotos.length) openLightbox(decodeURIComponent(m[1]));
+}
+
+window.addEventListener('hashchange', () => {
+  const m = location.hash.match(/^#\/photo\/(.+)$/);
+  if (m && !lightbox.classList.contains('open')) openLightbox(decodeURIComponent(m[1]));
+  else if (!m && lightbox.classList.contains('open')) closeLightbox();
 });
 
 document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -624,7 +855,7 @@ commentForm.addEventListener('submit', async e => {
       modalComments = data.comments;
       renderComments();
       if (heatMap) heatMap[modalId] = { likes: heatMap[modalId]?.likes || 0, comments: data.comments.length };
-      gallery.querySelectorAll(`.act-comment[data-id="${modalId}"]`).forEach(b => setCount(b, 'comments', data.comments.length));
+      syncComments(modalId, data.comments.length);
     } else if (data.error) {
       commentInput.value = text;
       alert(data.error);
