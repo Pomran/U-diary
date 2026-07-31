@@ -229,17 +229,11 @@ function loadMore() {
       card.dataset.cat = p.cat;
       card.innerHTML = `
         <div class="photo-img-wrap">
-          <img src="${p.src}" alt="${p.title}" loading="lazy" />
-          <span class="photo-badge">☀ ${p.badge || 'memory'}</span>
+          <img src="${p.src}" alt="photo" loading="lazy" />
+          <span class="photo-badge">${p.date}</span>
         </div>
         <div class="photo-info">
           <div class="photo-date">${p.date}</div>
-          <h2 class="photo-title">${p.title}</h2>
-          <p class="photo-desc">${p.desc}</p>
-          <div class="photo-tags">
-            <span class="photo-tag">#${p.cat}</span>
-            ${p.badge ? `<span class="photo-tag">#${p.badge}</span>` : ''}
-          </div>
         </div>
       `;
       gallery.appendChild(card);
