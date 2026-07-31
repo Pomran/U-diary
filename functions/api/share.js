@@ -33,13 +33,21 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: '今天已经发过一张啦，明天再来' }, 400);
   }
 
+  if (!env.DIARY_BUCKET) {
+    return json({ ok: false, error: 'R2 绑定未配置' }, 500);
+  }
+
   const photoId = 'pub-' + Date.now().toString(36) + randomSalt(3);
   const ext = (file.name ? file.name.split('.').pop() : 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
   const key = `shares/${today}/${photoId}.${ext}`;
 
-  await env.DIARY_BUCKET.put(key, file.stream(), {
-    httpMetadata: { contentType: file.type || 'image/jpeg' },
-  });
+  try {
+    await env.DIARY_BUCKET.put(key, file.stream(), {
+      httpMetadata: { contentType: file.type || 'image/jpeg' },
+    });
+  } catch (e) {
+    return json({ ok: false, error: '上传失败: ' + (e && e.message) }, 500);
+  }
 
   const share = {
     photoId,
