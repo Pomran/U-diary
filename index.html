@@ -168,6 +168,17 @@ nav {
 }
 .photo-card:hover .photo-img-wrap::after { opacity: 1; }
 
+.photo-author {
+  position: absolute; top: 0; left: 0; z-index: 3;
+  padding: 0.7rem 0.85rem 0.4rem;
+  background: linear-gradient(rgba(0,0,0,0.45), transparent);
+  color: #fff; font-size: 0.82rem; font-weight: 500;
+  opacity: 0; transition: opacity 0.3s ease;
+  pointer-events: none; border-radius: var(--radius) 0 0 0;
+}
+.photo-card:hover .photo-author { opacity: 1; }
+@media (hover: none) { .photo-author { opacity: 1; } }
+
 /* ─── 卡片操作栏: 喜爱 / 评价 ─── */
 .photo-actions {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
@@ -660,6 +671,7 @@ function createCardHTML(p) {
   const liked = !!localStorage.getItem('liked:' + p.id);
   return `
     <div class="photo-img-wrap" data-id="${p.id}">
+      ${p.cat === 'user' ? `<div class="photo-author">@${shareMap[p.id]?.nickname || ''}</div>` : ''}
       <img src="${p.src}" alt="photo" loading="lazy" decoding="async" onload="this.classList.add('loaded')" />
       <div class="photo-actions">
         <button class="act act-like${liked ? ' liked' : ''}" data-id="${p.id}" title="喜爱">
