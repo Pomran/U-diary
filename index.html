@@ -107,6 +107,14 @@ nav {
 .nav-sort svg { width: 15px; height: 15px; opacity: 0.7; }
 .nav-sort:hover { color: var(--text); background: var(--primary-light); transform: translateY(-1px); }
 .nav-sort.active { color: #fff; background: var(--primary); border-color: var(--primary); transform: scale(1.02); box-shadow: 0 4px 12px rgba(91,138,122,0.25); }
+.nav-publish {
+  font-size: 0.9rem; padding: 0.45rem 1.1rem; border-radius: 20px; border: 1px solid var(--primary);
+  background: var(--primary); color: #fff; cursor: pointer; font-family: inherit;
+  display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;
+  transition: all 0.3s var(--ease-spring); flex-shrink: 0;
+}
+.nav-publish svg { width: 15px; height: 15px; }
+.nav-publish:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 4px 12px rgba(91,138,122,0.35); }
 
 /* ─── Stats ─── */
 .stats { text-align: center; padding: 2.5rem 1.5rem 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
@@ -259,6 +267,8 @@ nav {
   background: linear-gradient(transparent, rgba(0,0,0,0.55));
 }
 .lb-meta { display: flex; gap: 0.7rem; align-items: baseline; }
+.lb-left { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.lb-caption { color: rgba(255,255,255,0.92); font-size: 0.9rem; max-width: 70vw; word-break: break-word; }
 .lb-cat {
   font-family: 'Noto Serif SC', serif; background: rgba(91,138,122,0.75); color: #fff;
   padding: 0.15rem 0.7rem; border-radius: 12px; font-size: 0.78rem; white-space: nowrap;
@@ -338,6 +348,33 @@ nav {
 }
 .comment-form button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(91,138,122,0.35); }
 
+/* ─── 发布弹窗 ─── */
+.pub-body { padding: 1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 0.7rem; }
+.pub-pick {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  border: 2px dashed var(--border); border-radius: 12px; padding: 1rem; cursor: pointer;
+  color: var(--text-light); font-size: 0.9rem; transition: all 0.25s ease; min-height: 90px;
+}
+.pub-pick:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+.pub-pick.picked { border-style: solid; border-color: var(--primary); }
+.pub-pick img { max-height: 170px; max-width: 100%; border-radius: 8px; }
+.pub-input {
+  border: 1px solid var(--border); border-radius: 10px; padding: 0.55rem 0.9rem;
+  font-family: inherit; font-size: 0.9rem; background: var(--card-bg); color: var(--text); outline: none;
+  transition: border-color 0.2s ease;
+}
+.pub-input:focus { border-color: var(--primary); }
+.pub-legend { font-size: 0.78rem; color: var(--text-muted); }
+.pub-actions { display: flex; justify-content: flex-end; }
+.pub-submit {
+  border: none; border-radius: 20px; padding: 0.55rem 1.4rem; cursor: pointer;
+  background: var(--primary); color: #fff; font-family: inherit; font-size: 0.9rem;
+  transition: all 0.25s var(--ease-spring);
+}
+.pub-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(91,138,122,0.35); }
+.pub-submit:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.pub-error { color: #c96f6f; font-size: 0.85rem; min-height: 1.2em; }
+
 /* ─── Footer ─── */
 footer { text-align: center; padding: 3rem 1.5rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; background: #f7f4ef; }
 footer span { font-family: 'Caveat', cursive; font-size: 1.15rem; color: var(--primary); display: inline-block; transition: transform 0.3s var(--ease-spring); }
@@ -376,6 +413,10 @@ footer:hover span { transform: rotate(12deg) scale(1.2); }
         按热度
       </button>
     </div>
+    <button class="nav-publish" id="publishBtn" title="发布一张照片">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      发布
+    </button>
   </div>
 </nav>
 
@@ -408,9 +449,12 @@ footer:hover span { transform: rotate(12deg) scale(1.2); }
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
   </button>
   <div class="lb-info">
-    <div class="lb-meta">
-      <span class="lb-cat" id="lbCat"></span>
-      <span class="lb-date" id="lbDate"></span>
+    <div class="lb-left">
+      <div class="lb-meta">
+        <span class="lb-cat" id="lbCat"></span>
+        <span class="lb-date" id="lbDate"></span>
+      </div>
+      <div class="lb-caption" id="lbCaption"></div>
     </div>
     <div class="lb-actions">
       <button class="act lb-action act-like" id="lbLike" data-id="" title="喜爱">
@@ -421,6 +465,30 @@ footer:hover span { transform: rotate(12deg) scale(1.2); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <span class="act-count" data-kind="comments">0</span>
       </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="publishModal">
+  <div class="modal" style="width:min(520px,100%)">
+    <div class="modal-head">
+      <h3>发布一张</h3>
+      <button class="modal-close" id="pubClose" title="关闭">×</button>
+    </div>
+    <div class="pub-body">
+      <div class="pub-legend">每人每天限发 1 张 · 上传自动压缩，不影响观感</div>
+      <div class="pub-pick" id="pubPick">
+        <img id="pubPreview" src="" alt="" hidden>
+        <span id="pubPickText">选择图片</span>
+        <input type="file" id="pubFile" accept="image/*" hidden>
+      </div>
+      <input class="pub-input" id="pubNick" placeholder="你的昵称（新昵称请设置口令）" maxlength="20">
+      <input class="pub-input" id="pubSecret" type="password" placeholder="口令（至少 4 位，用于换设备找回昵称）" maxlength="40">
+      <input class="pub-input" id="pubCaption" placeholder="一句说明（可选，最多 120 字）" maxlength="120">
+      <div class="pub-error" id="pubError"></div>
+      <div class="pub-actions">
+        <button class="pub-submit" id="pubSubmit">发布</button>
+      </div>
     </div>
   </div>
 </div>
@@ -454,6 +522,12 @@ let modalComments = [];
 let lbIndex = -1;
 let lbList = [];
 let lbTouchX = 0;
+let shareMap = {};
+let ud_device = localStorage.getItem('ud_device');
+if (!ud_device) {
+  ud_device = 'd-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+  localStorage.setItem('ud_device', ud_device);
+}
 
 const gallery = document.getElementById('gallery');
 const loader = document.getElementById('loader');
@@ -466,6 +540,16 @@ const lbDate = document.getElementById('lbDate');
 const lbCounter = document.getElementById('lbCounter');
 const lbLike = document.getElementById('lbLike');
 const lbComment = document.getElementById('lbComment');
+const lbCaption = document.getElementById('lbCaption');
+const publishModal = document.getElementById('publishModal');
+const pubFile = document.getElementById('pubFile');
+const pubPreview = document.getElementById('pubPreview');
+const pubPick = document.getElementById('pubPick');
+const pubNick = document.getElementById('pubNick');
+const pubSecret = document.getElementById('pubSecret');
+const pubCaption = document.getElementById('pubCaption');
+const pubSubmit = document.getElementById('pubSubmit');
+const pubError = document.getElementById('pubError');
 const modal = document.getElementById('commentModal');
 const modalPhoto = document.getElementById('modalPhoto');
 const commentList = document.getElementById('commentList');
@@ -482,6 +566,7 @@ async function loadPhotos() {
     if (!photosRes.ok) throw new Error('photos.json error');
     allPhotos = await photosRes.json();
     heatMap = (heatRes && heatRes.ok) ? await heatRes.json() : {};
+    await refreshFeed();
   } catch (e) {
     heatMap = {};
     try {
@@ -495,6 +580,21 @@ async function loadPhotos() {
   }
   onSort('time');
   handleHash();
+}
+
+/* ─── 用户发布的照片（合并入瀑布流） ─── */
+async function refreshFeed() {
+  try {
+    const res = await fetch('./api/feed');
+    if (!res.ok) return;
+    const shares = await res.json();
+    shareMap = {};
+    allPhotos = allPhotos.filter(p => p.cat !== 'user');
+    shares.forEach(s => {
+      shareMap[s.photoId] = s;
+      allPhotos.push({ id: s.photoId, src: s.src, date: String(s.date).replace(/-/g, '.'), cat: 'user' });
+    });
+  } catch (e) { /* 忽略，瀑布流仍可用 */ }
 }
 
 /* ─── 排序 ─── */
@@ -809,8 +909,16 @@ function renderLightbox() {
   lbComment.dataset.id = p.id;
 
   lbLike.classList.toggle('liked', !!localStorage.getItem('liked:' + p.id));
-  lbCat.textContent = CAT_NAMES[p.cat] || '';
+  const share = shareMap[p.id];
+  lbCat.textContent = share ? '@' + share.nickname : (CAT_NAMES[p.cat] || '');
   lbDate.textContent = fmtDate(p.date);
+  if (share && share.caption) {
+    lbCaption.textContent = share.caption;
+    lbCaption.style.display = '';
+  } else {
+    lbCaption.textContent = '';
+    lbCaption.style.display = 'none';
+  }
   lbCounter.textContent = `${lbIndex + 1} / ${lbList.length}`;
 
   const c = heatMap ? heatMap[p.id] : null;
@@ -892,7 +1000,7 @@ modal.addEventListener('click', e => {
   if (e.target === modal) closeModal();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') { closeModal(); closePublish(); }
 });
 
 commentForm.addEventListener('submit', async e => {
@@ -921,6 +1029,119 @@ commentForm.addEventListener('submit', async e => {
   } catch (err) {
     commentInput.value = text;
     alert('发送失败，请稍后再试');
+  }
+});
+
+/* ─── 发布 ─── */
+function openPublish() {
+  pubNick.value = localStorage.getItem('ud_nick') || '';
+  pubSecret.value = localStorage.getItem('ud_secret') || '';
+  pubCaption.value = '';
+  pubError.textContent = '';
+  pubFile.value = '';
+  pubPreview.hidden = true;
+  pubPreview.src = '';
+  pubPick.classList.remove('picked');
+  publishModal.classList.add('open');
+  pubNick.focus();
+}
+
+function closePublish() {
+  publishModal.classList.remove('open');
+}
+
+document.getElementById('publishBtn').addEventListener('click', openPublish);
+document.getElementById('pubClose').addEventListener('click', closePublish);
+publishModal.addEventListener('click', e => {
+  if (e.target === publishModal) closePublish();
+});
+
+pubPick.addEventListener('click', () => pubFile.click());
+
+pubFile.addEventListener('change', () => {
+  const f = pubFile.files[0];
+  if (!f) return;
+  if (!f.type.startsWith('image/')) { pubError.textContent = '请选择图片文件'; return; }
+  if (f.size > 15 * 1024 * 1024) { pubError.textContent = '原图请勿超过 15MB'; return; }
+  pubPreview.src = URL.createObjectURL(f);
+  pubPreview.hidden = false;
+  pubPick.classList.add('picked');
+  pubError.textContent = '';
+});
+
+// 客户端压缩：最长边 2000px + JPEG 0.85，肉眼无损，体积大幅下降
+function compressImage(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 2000;
+      const scale = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+      const width = Math.round(img.naturalWidth * scale);
+      const height = Math.round(img.naturalHeight * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (file.type === 'image/png') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, width, height);
+      }
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('compress fail')), 'image/jpeg', 0.85);
+    };
+    img.onerror = () => reject(new Error('bad image'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+pubSubmit.addEventListener('click', async () => {
+  const file = pubFile.files[0];
+  const nickname = pubNick.value.trim();
+  if (!file) { pubError.textContent = '请先选择图片'; return; }
+  if (!nickname) { pubError.textContent = '请输入昵称'; return; }
+  if (!pubSecret.value.trim()) {
+    pubError.textContent = '请填写口令（新昵称注册用，老用户输对即可）';
+    return;
+  }
+
+  pubSubmit.disabled = true;
+  pubError.textContent = '';
+  try {
+    const claimRes = await fetch('./api/auth/claim', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nickname, secret: pubSecret.value.trim(), device: ud_device }),
+    });
+    const claimData = await claimRes.json();
+    if (!claimData.ok) {
+      pubError.textContent = claimData.error || '昵称校验失败';
+      return;
+    }
+
+    const blob = await compressImage(file);
+    const base = (file.name || 'photo').replace(/\.[^.]+$/, '');
+    const fd = new FormData();
+    fd.append('file', new File([blob], base + '.jpg', { type: 'image/jpeg' }));
+    fd.append('nickname', nickname);
+    fd.append('secret', pubSecret.value.trim());
+    fd.append('caption', pubCaption.value.trim());
+    fd.append('device', ud_device);
+
+    const res = await fetch('./api/share', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.ok) {
+      localStorage.setItem('ud_nick', nickname);
+      localStorage.setItem('ud_secret', pubSecret.value.trim());
+      closePublish();
+      await refreshFeed();
+      onSort(currentSort);
+    } else {
+      pubError.textContent = data.error || '发布失败';
+    }
+  } catch (e) {
+    pubError.textContent = '网络异常，请重试';
+  } finally {
+    pubSubmit.disabled = false;
   }
 });
 
