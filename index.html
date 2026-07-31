@@ -278,6 +278,9 @@ nav {
 .lb-action { background: rgba(255,255,255,0.92); }
 .lb-action.liked { color: var(--secondary); background: rgba(255,250,250,0.95); }
 .lb-action.liked svg { fill: var(--secondary); stroke: var(--secondary); }
+.lb-del { background: rgba(255,255,255,0.92); color: var(--text); }
+.lb-del:hover { background: #c96f6f; color: #fff; }
+.lb-del[hidden] { display: none; }
 
 @media (max-width: 640px) {
   .lb-stage { padding: 4rem 0.5rem 4.5rem; }
@@ -465,6 +468,7 @@ footer:hover span { transform: rotate(12deg) scale(1.2); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <span class="act-count" data-kind="comments">0</span>
       </button>
+      <button class="act lb-action lb-del" id="lbDel" title="删除我的发布" hidden>删除</button>
     </div>
   </div>
 </div>
@@ -541,6 +545,7 @@ const lbCounter = document.getElementById('lbCounter');
 const lbLike = document.getElementById('lbLike');
 const lbComment = document.getElementById('lbComment');
 const lbCaption = document.getElementById('lbCaption');
+const lbDel = document.getElementById('lbDel');
 const publishModal = document.getElementById('publishModal');
 const pubFile = document.getElementById('pubFile');
 const pubPreview = document.getElementById('pubPreview');
@@ -912,6 +917,9 @@ function renderLightbox() {
   const share = shareMap[p.id];
   lbCat.textContent = share ? '@' + share.nickname : (CAT_NAMES[p.cat] || '');
   lbDate.textContent = fmtDate(p.date);
+  const mine = !!(share && localStorage.getItem('ud_nick') === share.nickname);
+  lbDel.hidden = !mine;
+  lbDel.dataset.id = p.id;
   if (share && share.caption) {
     lbCaption.textContent = share.caption;
     lbCaption.style.display = '';
@@ -970,6 +978,35 @@ lightbox.addEventListener('click', e => {
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 document.getElementById('lbPrev').addEventListener('click', () => goLightbox(-1));
 document.getElementById('lbNext').addEventListener('click', () => goLightbox(1));
+
+lbDel.addEventListener('click', async () => {
+  const id = lbDel.dataset.id;
+  const nick = localStorage.getItem('ud_nick');
+  if (!id || !nick) return;
+  if (!confirm('确定删除这条发布？')) return;
+  try {
+    const res = await fetch('./api/share/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        photoId: id,
+        nickname: nick,
+        secret: localStorage.getItem('ud_secret') || '',
+        device: ud_device,
+      }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      closeLightbox();
+      await refreshFeed();
+      onSort(currentSort);
+    } else {
+      alert(data.error || '删除失败');
+    }
+  } catch (e) {
+    alert('网络异常，请重试');
+  }
+});
 
 lbStage.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
 lbStage.addEventListener('touchend', e => {
