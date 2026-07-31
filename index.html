@@ -49,8 +49,8 @@ body::before {
 }
 
 header {
-  min-height: 85vh;
-  min-height: 85dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex; flex-direction: column; justify-content: center;
   align-items: center; text-align: center; padding: 2rem 1rem; position: relative; overflow: hidden;
 }
@@ -434,8 +434,9 @@ footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--pr
         <span id="pubPickText">选择图片</span>
         <input type="file" id="pubFile" accept="image/*" hidden>
       </div>
-      <input class="pub-input" id="pubNick" placeholder="你的昵称" maxlength="20">
-      <input class="pub-input" id="pubSecret" type="password" placeholder="口令（至少 4 位）" maxlength="40">
+      <input class="pub-input" id="pubNick" placeholder="你的昵称（中英文 / 数字 / 下划线，1-20 字）" maxlength="20">
+      <input class="pub-input" id="pubSecret" type="password" placeholder="设置你的口令（至少 4 位字符）" maxlength="40">
+      <div class="pub-legend" style="color:var(--text-muted);line-height:1.5;">首次使用昵称时请设置口令；以后再发布时输入相同口令即可认领。同一台设备下次无需重复输入。</div>
       <input class="pub-input" id="pubCaption" placeholder="一句说明（可选，最多 120 字）" maxlength="120">
       <div class="pub-error" id="pubError"></div>
       <div class="pub-actions">
