@@ -115,7 +115,11 @@ nav {
 .loader { text-align: center; padding: 2rem 1.5rem 4rem; color: var(--text-muted); font-family: 'Caveat', cursive; font-size: 1.2rem; }
 .loader .spinner { display: inline-block; width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loader.done { display: none; }
+.loader .finished-text { display: none; color: var(--primary); letter-spacing: 0.1em; }
+.loader.done .spinner,
+.loader.done .loading-text { display: none; }
+.loader.done .finished-text { display: block; }
+.loader.hidden { display: none; }
 .empty-state { grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; color: var(--text-muted); font-family: 'Caveat', cursive; font-size: 1.4rem; }
 
 /* ─── Footer ─── */
@@ -160,7 +164,8 @@ footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--pr
 
 <div class="loader" id="loader">
   <div class="spinner"></div>
-  <div>加载更多回忆...</div>
+  <div class="loading-text">加载更多回忆...</div>
+  <div class="finished-text">✦ 未完待续 ✦</div>
 </div>
 
 <footer>
@@ -210,11 +215,13 @@ function onFilter(cat) {
 
   gallery.innerHTML = '';
   loader.classList.remove('done');
+  loader.classList.remove('hidden');
   stats.innerHTML = `✦ 共 <em>${displayList.length}</em> 张照片 ✦`;
 
   if (displayList.length === 0) {
     gallery.innerHTML = `<div class="empty-state">✦ 暂无该分类下的照片 ✦</div>`;
-    loader.classList.add('done');
+    loader.classList.add('hidden');
+    loader.classList.remove('done');
     return;
   }
 
