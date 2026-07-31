@@ -14,11 +14,11 @@
   --primary-light: #e8f0ed;
   --secondary: #d4a5a5;
   --text: #2d2d2d;
-  --text-light: #8a8a8a;
+  --text-light: #7a7a7a;
   --text-muted: #b5b0a8;
   --border: #e8e0d5;
-  --shadow: rgba(91, 138, 122, 0.08);
-  --radius: 16px;
+  --shadow: 0 10px 30px -10px rgba(91, 138, 122, 0.12);
+  --radius: 12px;
   --max-w: 1200px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,90 +30,103 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #d0c8be; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
 body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat; background-size: 200px 200px;
 }
 
 /* ─── Header ─── */
 header {
-  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-  align-items: center; text-align: center; padding: 2rem; position: relative; overflow: hidden;
+  min-height: 85vh; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; padding: 2rem 1rem; position: relative; overflow: hidden;
 }
 header::before {
   content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(ellipse at 40% 50%, var(--primary-light) 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 50%, rgba(212,165,165,0.15) 0%, transparent 50%);
-  animation: ambientGlow 12s ease-in-out infinite alternate;
+  background: radial-gradient(circle at 50% 50%, var(--primary-light) 0%, transparent 60%),
+              radial-gradient(circle at 75% 35%, rgba(212,165,165,0.18) 0%, transparent 45%);
+  animation: ambientGlow 14s ease-in-out infinite alternate;
 }
 @keyframes ambientGlow {
-  0% { transform: translate(0,0) rotate(0deg); }
-  100% { transform: translate(2%,-2%) rotate(3deg); }
+  0% { transform: translate(0,0) scale(1); }
+  100% { transform: translate(1%, -1%) scale(1.03); }
 }
-.hero-content { position: relative; z-index: 1; animation: fadeUp 1.2s ease-out; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.hero-sub { font-family: 'Caveat', cursive; font-size: 1.4rem; color: var(--secondary); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
-.hero-title { font-family: 'Playfair Display','Noto Serif SC',serif; font-size: clamp(3rem,8vw,5.5rem); font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 1rem; }
-.hero-title em { font-style: italic; color: var(--primary); }
-.hero-desc { font-size: 1.1rem; color: var(--text-light); max-width: 500px; margin: 0 auto 2rem; line-height: 1.8; }
-.hero-scroll { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--text-muted); animation: bounce 2s ease-in-out infinite; }
-@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+.hero-content { position: relative; z-index: 1; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.hero-sub { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--secondary); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+.hero-title { font-family: 'Playfair Display','Noto Serif SC',serif; font-size: clamp(3rem, 7vw, 5rem); font-weight: 400; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+.hero-title em { font-style: italic; color: var(--primary); font-weight: 600; }
+.hero-desc { font-size: 1.05rem; color: var(--text-light); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.8; }
+.hero-scroll { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--text-muted); animation: bounce 2s ease-in-out infinite; user-select: none; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-/* ─── Nav ─── */
-nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2); background: rgba(250,248,245,0.7); border-bottom: 1px solid var(--border); padding: 0 1rem; }
-.nav-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-.nav-logo { font-family: 'Playfair Display',serif; font-size: 1.1rem; color: var(--primary); text-decoration: none; letter-spacing: 0.03em; }
-.nav-categories { display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: flex-end; }
-.nav-cat { font-size: 0.85rem; padding: 0.35rem 0.9rem; border-radius: 20px; border: none; background: transparent; color: var(--text-light); cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+/* ─── Nav (移动端横向滚动分类条) ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(250,248,245,0.85); border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center;
+  justify-content: space-between; height: 60px; padding: 0 1.5rem;
+}
+.nav-logo { font-family: 'Playfair Display',serif; font-size: 1.2rem; font-weight: 600; color: var(--primary); text-decoration: none; letter-spacing: 0.03em; }
+.nav-categories { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.25rem 0; scrollbar-width: none; }
+.nav-categories::-webkit-scrollbar { display: none; }
+.nav-cat {
+  font-size: 0.88rem; padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid transparent;
+  background: transparent; color: var(--text-light); cursor: pointer; transition: all 0.25s ease;
+  white-space: nowrap; font-family: inherit;
+}
 .nav-cat:hover { color: var(--text); background: var(--primary-light); }
-.nav-cat.active { color: #fff; background: var(--primary); }
+.nav-cat.active { color: #fff; background: var(--primary); border-color: var(--primary); }
 
 /* ─── Stats ─── */
-.stats { text-align: center; padding: 2rem 1.5rem 0; color: var(--text-muted); font-size: 0.9rem; }
-.stats em { font-family: 'Caveat', cursive; color: var(--primary); font-size: 1.1rem; font-style: normal; }
+.stats { text-align: center; padding: 2.5rem 1.5rem 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+.stats em { font-family: 'Caveat', cursive; color: var(--primary); font-size: 1.2rem; font-style: normal; margin: 0 0.2rem; }
 
 /* ─── Gallery ─── */
-.gallery { max-width: var(--max-w); margin: 0 auto; padding: 2rem 1.5rem 3rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+.gallery { max-width: var(--max-w); margin: 0 auto; padding: 1.5rem 1.5rem 3rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; min-height: 400px; }
 
-/* ─── Photo Card ─── */
-.photo-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 24px var(--shadow); transition: transform 0.4s ease, box-shadow 0.4s ease; opacity: 0; transform: translateY(20px); }
-.photo-card.show { animation: cardIn 0.5s ease forwards; }
-@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
-.photo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(91,138,122,0.12); }
-.photo-card.hidden { display: none; }
-.photo-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--primary-light); }
-.photo-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-.photo-card:hover .photo-img-wrap img { transform: scale(1.04); }
-.photo-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.03)); pointer-events: none; }
-.photo-badge { position: absolute; top: 12px; left: 12px; font-family: 'Caveat', cursive; font-size: 0.8rem; color: #fff; background: rgba(0,0,0,0.35); backdrop-filter: blur(8px); padding: 0.2rem 0.7rem; border-radius: 12px; letter-spacing: 0.03em; }
-.photo-info { padding: 1.2rem 1.5rem 1.5rem; }
-.photo-date { font-family: 'Caveat', cursive; font-size: 0.95rem; color: var(--secondary); margin-bottom: 0.2rem; }
-.photo-title { font-family: 'Noto Serif SC',serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; line-height: 1.4; }
-.photo-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
-.photo-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
-.photo-tag { font-size: 0.72rem; padding: 0.15rem 0.6rem; border-radius: 10px; background: var(--primary-light); color: var(--primary); letter-spacing: 0.02em; }
+/* ─── Photo Card (仅图片) ─── */
+.photo-card {
+  background: var(--card-bg); border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); box-shadow: var(--shadow);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  opacity: 0; transform: translateY(16px);
+}
+.photo-card.show { opacity: 1; transform: translateY(0); }
+.photo-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px -8px rgba(91,138,122,0.18); }
+.photo-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: #ebdcd0; }
+.photo-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.photo-img-wrap img.loaded { opacity: 1; }
+.photo-card:hover .photo-img-wrap img { transform: scale(1.03); }
 
-/* ─── Loader ─── */
-.loader { text-align: center; padding: 3rem 1.5rem 5rem; color: var(--text-muted); font-family: 'Caveat', cursive; font-size: 1.2rem; }
-.loader .spinner { display: inline-block; width: 28px; height: 28px; border: 2px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
+/* ─── Loader & Empty ─── */
+.loader { text-align: center; padding: 2rem 1.5rem 4rem; color: var(--text-muted); font-family: 'Caveat', cursive; font-size: 1.2rem; }
+.loader .spinner { display: inline-block; width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 0.5rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loader.done { opacity: 0; pointer-events: none; }
-
-.empty-state { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-family: 'Caveat', cursive; font-size: 1.3rem; }
+.loader.done { display: none; }
+.empty-state { grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; color: var(--text-muted); font-family: 'Caveat', cursive; font-size: 1.4rem; }
 
 /* ─── Footer ─── */
-footer { text-align: center; padding: 3rem 1.5rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
-footer span { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--primary); }
+footer { text-align: center; padding: 3rem 1.5rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; background: #f7f4ef; }
+footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--primary); }
 
-@media (max-width: 700px) {
-  .gallery { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem 1rem 2rem; }
-  .nav-inner { flex-direction: column; height: auto; gap: 0.5rem; padding: 0.6rem 0; }
+@media (max-width: 640px) {
+  .gallery { grid-template-columns: 1fr; gap: 1.25rem; padding: 1rem; }
+  .nav-inner { padding: 0 1rem; height: auto; flex-direction: row; flex-wrap: nowrap; }
   .nav-logo { display: none; }
-  .hero-title { font-size: clamp(2.2rem,10vw,3rem); }
+  .hero-title { font-size: 2.8rem; }
 }
 </style>
 </head>
@@ -121,7 +134,7 @@ footer span { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--prim
 
 <header>
   <div class="hero-content">
-    <div class="hero-sub">✦  My University Diary  ✦</div>
+    <div class="hero-sub">✦ My University Diary ✦</div>
     <h1 class="hero-title">晴れ<br>日記<em>.</em></h1>
     <p class="hero-desc">用快门定格了四年的光。<br>翻开这本日记，每一页都是回不去的晴天。</p>
     <div class="hero-scroll">↓ 往下翻阅</div>
@@ -143,7 +156,6 @@ footer span { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--prim
 </nav>
 
 <div class="stats" id="stats"></div>
-
 <div class="gallery" id="gallery"></div>
 
 <div class="loader" id="loader">
@@ -152,16 +164,15 @@ footer span { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--prim
 </div>
 
 <footer>
-  <p>✎  photographed with <span>fun</span></p>
+  <p>✎ photographed with <span>fun</span></p>
   <p style="margin-top:0.3rem;font-size:0.78rem;">每一帧都是青春的切片</p>
 </footer>
 
 <script>
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 12;
 let allPhotos = [];
 let displayList = [];
 let currentIndex = 0;
-let currentCat = 'all';
 let loading = false;
 let loaded = false;
 
@@ -172,32 +183,50 @@ const stats = document.getElementById('stats');
 async function loadPhotos() {
   try {
     const res = await fetch('./photos.json');
+    if (!res.ok) throw new Error('Network error');
     allPhotos = await res.json();
     onFilter('all');
   } catch (e) {
-    gallery.innerHTML = `<div class="empty-state">✦ 照片加载失败了，请检查 photos.json ✦</div>`;
+    gallery.innerHTML = `<div class="empty-state">✦ 照片加载失败，请检查 photos.json 配置文件 ✦</div>`;
     loader.classList.add('done');
   }
 }
 
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
+  const newArr = [...arr];
+  for (let i = newArr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
   }
-  return arr;
+  return newArr;
 }
 
 function onFilter(cat) {
-  currentCat = cat;
-  const pool = cat === 'all' ? [...allPhotos] : allPhotos.filter(p => p.cat === cat);
+  const pool = cat === 'all' ? allPhotos : allPhotos.filter(p => p.cat === cat);
   displayList = shuffle(pool);
   currentIndex = 0;
+  loaded = false;
+  loading = false;
+
   gallery.innerHTML = '';
   loader.classList.remove('done');
-  loaded = false;
-  stats.textContent = `✦ 共 ${displayList.length} 张照片 ✦`;
+  stats.innerHTML = `✦ 共 <em>${displayList.length}</em> 张照片 ✦`;
+
+  if (displayList.length === 0) {
+    gallery.innerHTML = `<div class="empty-state">✦ 暂无该分类下的照片 ✦</div>`;
+    loader.classList.add('done');
+    return;
+  }
+
   loadMore();
+}
+
+function createCardHTML(p) {
+  return `
+    <div class="photo-img-wrap">
+      <img src="${p.src}" alt="photo" loading="lazy" decoding="async" onload="this.classList.add('loaded')" />
+    </div>
+  `;
 }
 
 function loadMore() {
@@ -216,47 +245,57 @@ function loadMore() {
   const batch = displayList.slice(currentIndex, currentIndex + count);
   currentIndex += count;
 
-  // Check if this was the last batch
+  const fragment = document.createDocumentFragment();
+  const newCards = [];
+
+  batch.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'photo-card';
+    card.innerHTML = createCardHTML(p);
+    fragment.appendChild(card);
+    newCards.push(card);
+  });
+
+  gallery.appendChild(fragment);
+
+  requestAnimationFrame(() => {
+    newCards.forEach((card, i) => {
+      setTimeout(() => card.classList.add('show'), i * 40);
+    });
+    loading = false;
+  });
+
   if (currentIndex >= displayList.length) {
     loader.classList.add('done');
     loaded = true;
   }
-
-  requestAnimationFrame(() => {
-    batch.forEach((p, i) => {
-      const card = document.createElement('article');
-      card.className = 'photo-card';
-      card.dataset.cat = p.cat;
-      card.innerHTML = `
-        <div class="photo-img-wrap">
-          <img src="${p.src}" alt="photo" loading="lazy" />
-        </div>
-      `;
-      gallery.appendChild(card);
-      // Stagger animation
-      setTimeout(() => card.classList.add('show'), i * 60);
-    });
-    loading = false;
-  });
 }
 
 // ─── Infinite Scroll ───
-const sentinel = new IntersectionObserver(([entry]) => {
+const observer = new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) loadMore();
-}, { rootMargin: '200px' });
-sentinel.observe(loader);
+}, { rootMargin: '300px' });
 
-// ─── Filter ───
+observer.observe(loader);
+
+// ─── Filter Listener (先切换内容，再滚动，避免视口跳动) ───
 document.getElementById('filters').addEventListener('click', e => {
   const btn = e.target.closest('.nav-cat');
-  if (!btn) return;
+  if (!btn || btn.classList.contains('active')) return;
+
   document.querySelectorAll('.nav-cat').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   onFilter(btn.dataset.cat);
+
+  // 仅当已滚动过 hero 时才平滑回到导航栏顶部
+  const navTop = document.getElementById('navbar').offsetTop;
+  if (window.scrollY > navTop) {
+    window.scrollTo({ top: navTop, behavior: 'smooth' });
+  }
 });
 
-// ─── Init ───
+// Init
 loadPhotos();
 </script>
 </body>
