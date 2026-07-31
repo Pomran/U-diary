@@ -168,8 +168,7 @@ nav {
   opacity: 0; transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.3s var(--ease-out-cubic);
 }
-.photo-card:hover .photo-actions,
-.photo-card.show .photo-actions { opacity: 1; transform: translateY(0); }
+.photo-card:hover .photo-actions { opacity: 1; transform: translateY(0); }
 @media (hover: none) {
   .photo-actions { opacity: 1; transform: translateY(0); }
 }
@@ -313,7 +312,14 @@ nav {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
   padding: 0.65rem 0.9rem; animation: fadeUp 0.35s var(--ease-out-cubic);
 }
-.comment-item .c-time { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+.comment-item .c-time { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.2rem; display: flex; justify-content: space-between; align-items: center; }
+.comment-item .c-del {
+  border: none; background: transparent; color: var(--text-muted); cursor: pointer;
+  font-size: 0.72rem; padding: 0.1rem 0.35rem; border-radius: 6px; font-family: inherit;
+  transition: all 0.2s ease; opacity: 0;
+}
+.comment-item:hover .c-del { opacity: 1; }
+.comment-item .c-del:hover { color: #c96f6f; background: #f7e9e9; }
 .comment-item .c-text { font-size: 0.9rem; color: var(--text); word-break: break-word; }
 .comment-form {
   display: flex; gap: 0.5rem; padding: 0.85rem 1.25rem 1.1rem;
@@ -636,8 +642,9 @@ function setCount(btn, kind, value) {
 }
 
 function syncLikes(id, likes) {
+  const liked = !!localStorage.getItem('liked:' + id);
   document.querySelectorAll(`.act-like[data-id="${id}"]`).forEach(b => {
-    b.classList.add('liked');
+    b.classList.toggle('liked', liked);
     const el = b.querySelector('.act-count');
     if (el) el.textContent = likes;
   });
@@ -649,23 +656,25 @@ function syncComments(id, count) {
 
 async function handleLike(btn) {
   const id = btn.dataset.id;
-  if (localStorage.getItem('liked:' + id)) {
-    btn.classList.remove('pulse');
-    void btn.offsetWidth;
-    btn.classList.add('pulse');
-    return;
+  const liked = !!localStorage.getItem('liked:' + id);
+  const action = liked ? 'unlike' : 'like';
+
+  if (liked) {
+    localStorage.removeItem('liked:' + id);
+    btn.classList.remove('liked');
+  } else {
+    localStorage.setItem('liked:' + id, '1');
+    btn.classList.add('liked');
   }
-  localStorage.setItem('liked:' + id, '1');
-  btn.classList.add('liked');
 
   const current = parseInt(btn.querySelector('.act-count').textContent || '0', 10);
-  setCount(btn, 'likes', current + 1);
+  setCount(btn, 'likes', Math.max(0, current + (liked ? -1 : 1)));
 
   try {
     const res = await fetch(`./api/photo/${id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'like' }),
+      body: JSON.stringify({ action }),
     });
     const data = await res.json();
     if (data.ok) {
@@ -685,18 +694,63 @@ function fmtTime(t) {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
+function getMyComments(photoId) {
+  try { return JSON.parse(localStorage.getItem('myComments:' + photoId) || '[]'); } catch (e) { return []; }
+}
+function addMyComment(photoId, cid) {
+  const arr = getMyComments(photoId);
+  if (!arr.includes(cid)) arr.push(cid);
+  localStorage.setItem('myComments:' + photoId, JSON.stringify(arr));
+}
+function removeMyComment(photoId, cid) {
+  localStorage.setItem('myComments:' + photoId, JSON.stringify(getMyComments(photoId).filter(c => c !== cid)));
+}
+
 function renderComments() {
+  const mine = new Set(getMyComments(modalId));
   if (modalComments.length === 0) {
     commentList.innerHTML = `<div class="comment-empty">还没有评价，写下第一条吧 ✦</div>`;
     return;
   }
   commentList.innerHTML = modalComments.map(c => `
     <div class="comment-item">
-      <div class="c-time">${fmtTime(c.time)}</div>
+      <div class="c-time">
+        <span>${fmtTime(c.time)}</span>
+        ${c.id && mine.has(c.id) ? '<button class="c-del" data-cid="' + c.id + '" title="删除这条评价">删除</button>' : ''}
+      </div>
       <div class="c-text">${c.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
     </div>
   `).join('');
 }
+
+async function deleteComment(cid) {
+  if (!modalId || !cid) return;
+  const photoId = modalId;
+  try {
+    const res = await fetch(`./api/photo/${photoId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'deleteComment', commentId: cid }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      modalComments = data.comments;
+      renderComments();
+      removeMyComment(photoId, cid);
+      if (heatMap) heatMap[photoId] = { likes: heatMap[photoId]?.likes || 0, comments: data.comments.length };
+      syncComments(photoId, data.comments.length);
+    } else if (data.error) {
+      alert(data.error);
+    }
+  } catch (e) {
+    alert('删除失败，请稍后再试');
+  }
+}
+
+commentList.addEventListener('click', e => {
+  const del = e.target.closest('.c-del');
+  if (del) deleteComment(del.dataset.cid);
+});
 
 async function openModal(id) {
   modalId = id;
@@ -854,6 +908,8 @@ commentForm.addEventListener('submit', async e => {
     });
     const data = await res.json();
     if (data.ok) {
+      const newOne = data.comments[data.comments.length - 1];
+      if (newOne?.id) addMyComment(modalId, newOne.id);
       modalComments = data.comments;
       renderComments();
       if (heatMap) heatMap[modalId] = { likes: heatMap[modalId]?.likes || 0, comments: data.comments.length };

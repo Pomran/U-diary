@@ -28,10 +28,10 @@ export async function onRequestPost({ request, params, env }) {
     return json({ ok: false, error: 'bad json' }, 400);
   }
 
-  if (body.action === 'like') {
+  if (body.action === 'like' || body.action === 'unlike') {
     const key = `likes:${id}`;
     const current = parseInt((await env.DIARY_KV.get(key)) || '0', 10);
-    const next = current + 1;
+    const next = body.action === 'unlike' ? Math.max(0, current - 1) : current + 1;
     await env.DIARY_KV.put(key, String(next));
     return json({ ok: true, likes: next });
   }
@@ -48,10 +48,22 @@ export async function onRequestPost({ request, params, env }) {
     const key = `comments:${id}`;
     const raw = await env.DIARY_KV.get(key);
     const comments = raw ? JSON.parse(raw) : [];
-    comments.push({ text, time: Date.now() });
+    comments.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), text, time: Date.now() });
     const trimmed = comments.slice(-50);
     await env.DIARY_KV.put(key, JSON.stringify(trimmed));
     return json({ ok: true, comments: trimmed });
+  }
+
+  if (body.action === 'deleteComment') {
+    const key = `comments:${id}`;
+    const raw = await env.DIARY_KV.get(key);
+    const comments = raw ? JSON.parse(raw) : [];
+    const next = comments.filter(c => c.id && c.id === body.commentId);
+    if (next.length === comments.length) {
+      return json({ ok: false, error: '评论不存在' }, 404);
+    }
+    await env.DIARY_KV.put(key, JSON.stringify(next));
+    return json({ ok: true, comments: next });
   }
 
   return json({ ok: false, error: 'unknown action' }, 400);
