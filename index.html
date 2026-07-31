@@ -325,6 +325,10 @@ nav {
 .pub-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 .pub-error { color: #c96f6f; font-size: 0.8rem; min-height: 1.1em; }
 
+.fb-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 0.6rem; }
+.fb-item .fb-time { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+.fb-item .fb-text { font-size: 0.9rem; color: var(--text); word-break: break-word; }
+
 footer { text-align: center; padding: 2.5rem 1.5rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.82rem; background: #f7f4ef; }
 footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--primary); display: inline-block; }
 
@@ -382,7 +386,7 @@ footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--pr
 
 <footer>
   <p>✎ photographed with <span>fun</span></p>
-  <p style="margin-top:0.3rem;font-size:0.75rem;">每一帧都是青春的切片</p>
+  <p style="margin-top:0.3rem;font-size:0.75rem;">每一帧都是青春的切片 · <a href="#" id="feedbackLink" style="color:var(--text-muted);text-decoration:none;border-bottom:1px dotted var(--text-muted);cursor:pointer;">反馈</a></p>
 </footer>
 
 <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -419,6 +423,27 @@ footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--pr
       <button class="act lb-action lb-del" id="lbDel" title="删除我的发布" hidden>删除</button>
     </div>
   </div>
+</div>
+
+<div class="modal-backdrop" id="feedbackModal">
+  <div class="modal" style="width:min(440px,100%)">
+    <div class="modal-head">
+      <h3>反馈</h3>
+      <button class="modal-close" id="fbClose" title="关闭">×</button>
+    </div>
+    <div class="pub-body">
+      <textarea class="pub-input" id="fbText" rows="4" placeholder="写下你的想法、建议或遇到的问题..." maxlength="500" style="resize:vertical;min-height:80px;"></textarea>
+      <div class="pub-error" id="fbError"></div>
+      <div class="pub-actions">
+        <button class="pub-submit" id="fbSubmit">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="feedbackList" style="display:none;max-width:720px;margin:0 auto;padding:2rem 1.5rem 3rem;">
+  <h2 style="font-family:'Noto Serif SC',serif;margin-bottom:1.5rem;color:var(--primary);">反馈汇总</h2>
+  <div id="feedbackItems"></div>
 </div>
 
 <div class="modal-backdrop" id="publishModal">
@@ -509,6 +534,12 @@ const modalPhoto = document.getElementById('modalPhoto');
 const commentList = document.getElementById('commentList');
 const commentForm = document.getElementById('commentForm');
 const commentInput = document.getElementById('commentInput');
+const feedbackModal = document.getElementById('feedbackModal');
+const fbText = document.getElementById('fbText');
+const fbSubmit = document.getElementById('fbSubmit');
+const fbError = document.getElementById('fbError');
+const feedbackList = document.getElementById('feedbackList');
+const feedbackItems = document.getElementById('feedbackItems');
 
 function setScrollLock(lock) {
   document.body.style.overflow = lock ? 'hidden' : '';
@@ -997,6 +1028,78 @@ commentForm.addEventListener('submit', async e => {
     alert('发送失败，请稍后再试');
   }
 });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closePublish(); closeFeedback(); }
+});
+
+/* ─── 反馈 ─── */
+document.getElementById('feedbackLink').addEventListener('click', e => {
+  e.preventDefault();
+  openFeedback();
+});
+
+function openFeedback() {
+  fbText.value = '';
+  fbError.textContent = '';
+  feedbackModal.classList.add('open');
+  setScrollLock(true);
+  fbText.focus();
+}
+
+function closeFeedback() {
+  feedbackModal.classList.remove('open');
+  setScrollLock(false);
+}
+
+document.getElementById('fbClose').addEventListener('click', closeFeedback);
+feedbackModal.addEventListener('click', e => { if (e.target === feedbackModal) closeFeedback(); });
+
+fbSubmit.addEventListener('click', async () => {
+  const text = fbText.value.trim();
+  if (!text) { fbError.textContent = '请输入反馈内容'; return; }
+  fbSubmit.disabled = true;
+  try {
+    const res = await fetch('./api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      fbText.value = '';
+      fbError.textContent = '感谢反馈！';
+      setTimeout(closeFeedback, 1200);
+    } else {
+      fbError.textContent = data.error || '发送失败';
+    }
+  } catch (e) {
+    fbError.textContent = '网络异常，请重试';
+  } finally {
+    fbSubmit.disabled = false;
+  }
+});
+
+const FEEDBACK_KEY = 'ud-diary-2024';
+const showFeedback = new URLSearchParams(location.search).get('feedback_key') === FEEDBACK_KEY;
+if (showFeedback) {
+  document.getElementById('navbar').style.display = 'none';
+  document.getElementById('gallery').style.display = 'none';
+  document.getElementById('loader').style.display = 'none';
+  document.getElementById('stats').style.display = 'none';
+  feedbackList.style.display = 'block';
+  (async () => {
+    try {
+      const res = await fetch(`./api/feedback?key=${FEEDBACK_KEY}`);
+      const list = await res.json();
+      if (res.ok) {
+        feedbackItems.innerHTML = list.length === 0
+          ? '<p style="color:var(--text-muted);text-align:center;padding:2rem;">还没有反馈</p>'
+          : list.map(item => `<div class="fb-item"><div class="fb-time">${fmtTime(item.time)}</div><div class="fb-text">${item.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div></div>`).join('');
+      }
+    } catch (e) {}
+  })();
+}
 
 function openPublish() {
   pubNick.value = localStorage.getItem('ud_nick') || '';
