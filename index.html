@@ -436,7 +436,7 @@ footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--pr
       </div>
       <input class="pub-input" id="pubNick" placeholder="你的昵称（中英文 / 数字 / 下划线，1-20 字）" maxlength="20">
       <input class="pub-input" id="pubSecret" type="password" placeholder="设置你的口令（至少 4 位字符）" maxlength="40">
-      <div class="pub-legend" style="color:var(--text-muted);line-height:1.5;">首次使用昵称时请设置口令；以后再发布时输入相同口令即可认领。同一台设备下次无需重复输入。</div>
+      <div class="pub-legend" style="color:var(--text-muted);line-height:1.5;">首次输入昵称时请设置口令（至少 4 位字符）保证昵称唯一，同设备下次无需重复输入。</div>
       <input class="pub-input" id="pubCaption" placeholder="一句说明（可选，最多 120 字）" maxlength="120">
       <div class="pub-error" id="pubError"></div>
       <div class="pub-actions">
@@ -853,8 +853,9 @@ function renderLightbox() {
 
   lbLike.classList.toggle('liked', !!localStorage.getItem('liked:' + p.id));
   const share = shareMap[p.id];
-  lbCat.textContent = share ? '@' + share.nickname : (CAT_NAMES[p.cat] || '');
-  lbDate.textContent = fmtDate(p.date);
+  lbCat.textContent = share ? '@' + share.nickname : '';
+  lbCat.style.display = share ? '' : 'none';
+  lbDate.style.display = 'none';
   const mine = !!(share && localStorage.getItem('ud_nick') === share.nickname);
   lbDel.hidden = !mine;
   lbDel.dataset.id = p.id;
