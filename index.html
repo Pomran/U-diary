@@ -262,6 +262,10 @@ nav {
 .lb-del { background: rgba(255,255,255,0.9); color: var(--text); }
 .lb-del:hover { background: #c96f6f; color: #fff; }
 .lb-del[hidden] { display: none; }
+.lb-orig { background: rgba(255,255,255,0.15); color: #fff; }
+.lb-orig:hover { background: rgba(255,255,255,0.35); }
+.lb-orig.loaded { background: rgba(255,255,255,0.9); color: var(--text); cursor: default; }
+.lb-orig[hidden] { display: none; }
 
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 3000;
@@ -424,6 +428,7 @@ footer span { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--pr
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <span class="act-count" data-kind="comments">0</span>
       </button>
+      <button class="act lb-action lb-orig" id="lbOrig" title="加载原图" hidden>原图</button>
       <button class="act lb-action lb-del" id="lbDel" title="删除我的发布" hidden>删除</button>
     </div>
   </div>
@@ -524,6 +529,7 @@ const lbLike = document.getElementById('lbLike');
 const lbComment = document.getElementById('lbComment');
 const lbCaption = document.getElementById('lbCaption');
 const lbDel = document.getElementById('lbDel');
+const lbOrig = document.getElementById('lbOrig');
 const publishModal = document.getElementById('publishModal');
 const pubFile = document.getElementById('pubFile');
 const pubPreview = document.getElementById('pubPreview');
@@ -882,7 +888,9 @@ function fmtDate(d) {
 function renderLightbox() {
   const p = lbList[lbIndex];
   lbImage.classList.remove('loaded');
-  lbImage.src = p.src;
+  lbImage.src = p.full || p.src;
+  lbOrig.hidden = !p.full;
+  lbOrig.classList.remove('loaded');
   lbLike.dataset.id = p.id;
   lbComment.dataset.id = p.id;
 
@@ -954,6 +962,15 @@ lightbox.addEventListener('click', e => {
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 document.getElementById('lbPrev').addEventListener('click', () => goLightbox(-1));
 document.getElementById('lbNext').addEventListener('click', () => goLightbox(1));
+
+lbOrig.addEventListener('click', () => {
+  const p = lbList[lbIndex];
+  if (!p || !p.src || lbOrig.classList.contains('loaded')) return;
+  lbImage.classList.remove('loaded');
+  lbImage.src = p.src;
+  lbOrig.classList.add('loaded');
+  lbOrig.title = '已加载原图';
+});
 
 lbDel.addEventListener('click', async () => {
   const id = lbDel.dataset.id;
