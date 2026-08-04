@@ -6,7 +6,7 @@ import re
 import sys
 import urllib.request
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 PHOTOS_DIR = 'photos'
 JSON_PATH = 'photos.json'
@@ -19,6 +19,7 @@ THUMB_W = 1000   # 4:3 裁切后宽
 THUMB_H = 750
 FULL_MAX = 1600
 QUALITY = 82
+VERSION = 3
 
 SRC_RE = re.compile(r'/([0-9a-f]{32})\.\w+$')
 
@@ -55,7 +56,7 @@ def crop_4_3(im):
         box = (0, y, w, y + nh)
     return im.crop(box)
 
-def to_webp(im, size):
+def to_webp(im):
     buf = io.BytesIO()
     im.save(buf, 'WEBP', quality=QUALITY, method=4)
     return buf.getvalue()
@@ -68,12 +69,6 @@ def main():
     with open(JSON_PATH, encoding='utf-8') as f:
         entries = json.load(f)
 
-    by_md5 = {}
-    for idx, e in enumerate(entries):
-        m = SRC_RE.search(e.get('src', ''))
-        if m:
-            by_md5.setdefault(m.group(1), []).append(idx)
-
     files = []
     for fname in sorted(os.listdir(PHOTOS_DIR)):
         fpath = os.path.join(PHOTOS_DIR, fname)
@@ -82,6 +77,7 @@ def main():
         if ext not in ('jpg', 'jpeg', 'png', 'gif', 'webp'): continue
         files.append((fname, fpath))
 
+    md5_map = {md5_file(fp): fp for _, fp in files}
     print(f'本地照片: {len(files)} 张\n')
 
     ok = skip = 0
@@ -90,42 +86,42 @@ def main():
 
     for i, (fname, fpath) in enumerate(files):
         md5 = md5_file(fpath)
-        idxs = by_md5.get(md5)
-        if not idxs:
+        entry = next((e for e in entries if e.get('thumb', '').find(md5) >= 0), None)
+        if not entry:
             fail.append(f'{fname}: 未在 photos.json 找到对应条目')
-            continue
-        idx = idxs[0]
-        entry = entries[idx]
-        if entry.get('thumb') and entry.get('full'):
-            skip += 1
             continue
 
         thumb_key = f'thumbs/{md5}.webp'
         full_key = f'full/{md5}.webp'
+        thumb_url = f'{BUCKET_BASE}/{thumb_key}?v={VERSION}'
+        full_url = f'{BUCKET_BASE}/{full_key}?v={VERSION}'
 
-        try:
-            with Image.open(fpath) as im0:
-                im = im0.convert('RGB')
+        if entry.get('thumb') == thumb_url and entry.get('full') == full_url:
+            skip += 1
+        else:
+            try:
+                with Image.open(fpath) as im0:
+                    im = ImageOps.exif_transpose(im0).convert('RGB')
 
-                if not entry.get('thumb'):
                     t = crop_4_3(im).resize((THUMB_W, THUMB_H), Image.LANCZOS)
-                    if not upload(thumb_key, to_webp(t, (THUMB_W, THUMB_H)), 'image/webp'):
+                    if not upload(thumb_key, to_webp(t), 'image/webp'):
                         fail.append(f'{fname}: thumb 上传失败')
                         continue
-                    entry['thumb'] = f'{BUCKET_BASE}/{thumb_key}'
-                    ok += 1
 
-                if not entry.get('full'):
                     f = im.copy()
                     f.thumbnail((FULL_MAX, FULL_MAX), Image.LANCZOS)
-                    if not upload(full_key, to_webp(f, f.size), 'image/webp'):
+                    if not upload(full_key, to_webp(f), 'image/webp'):
                         fail.append(f'{fname}: full 上传失败')
                         continue
-                    entry['full'] = f'{BUCKET_BASE}/{full_key}'
+
+                    entry['thumb'] = thumb_url
+                    entry['full'] = full_url
+                    with open(JSON_PATH, 'w', encoding='utf-8') as f:
+                        json.dump(entries, f, ensure_ascii=False, indent=2)
                     ok += 1
-        except Exception as ex:
-            fail.append(f'{fname}: 生成失败 {ex}')
-            continue
+            except Exception as ex:
+                fail.append(f'{fname}: 生成失败 {ex}')
+                continue
 
         pct = (i + 1) / total * 100
         bar = '#' * (int(pct / 2)) + '-' * (50 - int(pct / 2))
@@ -136,13 +132,12 @@ def main():
     if ok:
         with open(JSON_PATH, 'w', encoding='utf-8') as f:
             json.dump(entries, f, ensure_ascii=False, indent=2)
-        print(f'photos.json 已更新: 新增 {ok} 个 thumb/full 字段')
+        print(f'photos.json 已更新: 处理 {ok} 张（thumb/full 均带 ?v={VERSION}）')
 
     if fail:
         print(f'\n失败 {len(fail)} 项:')
         for msg in fail:
             print('  ' + msg)
-        print('修复后可重跑（已生成的会跳过）')
 
     print(f'完成！新增 {ok} 上传, {skip} 跳过, {len(fail)} 失败')
     return 0 if not fail else 2
